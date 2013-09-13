@@ -1,0 +1,8 @@
+DROP TABLE Letters;
+DROP TABLE Payments;
+DROP TABLE Deliveries;
+DROP TABLE Subjects;
+DROP TABLE Bets;
+DROP TABLE Lots;
+DROP TABLE Category;
+DROP TABLE Users;
