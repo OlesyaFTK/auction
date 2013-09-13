@@ -1,7 +1,0 @@
-db\LotMapperTest.class
-db\LetterMapperTest.class
-db\DeliveryMapperTest.class
-db\UserMapperTest.class
-db\PaymentMapperTest.class
-db\TestConnectionManager.class
-db\CategoryMapperTest.class
