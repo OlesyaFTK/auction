@@ -66,6 +66,8 @@ public class UserMapper extends Mapper<User>{
                 statement = getInsertQuery((Administrator) user);
             } else if (user instanceof Customer) {
                 statement = getInsertQuery((Customer) user);
+            } else if (user instanceof Seller) {
+                statement = getInsertQuery((Seller) user);
             } else {
                 throw new DataMapperException("Unknown user type");
             }
@@ -247,6 +249,14 @@ public class UserMapper extends Mapper<User>{
         statement.setString(3, user.getSecondName());
         statement.setString(4, user.getEmail());
         statement.setInt(5, user.getId());
+        statement.executeUpdate();
+    }
+    
+    public void deleteAccount(final User user) throws SQLException {
+        assert (user != null);
+        final String query = "DELETE FROM Users where id=?";
+        PreparedStatement statement = connection_.prepareStatement(query);
+        statement.setInt(1, user.getId());
         statement.executeUpdate();
     }
 }

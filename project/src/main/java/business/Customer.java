@@ -19,5 +19,9 @@ public class Customer extends User {
                     final int rate) {
         super(id, login, password, name, secondName, email,rate);
     }
+
+    public Customer(String login, int password, String name, String lastName, String email, int rate) {
+        super(login, password, name, lastName, email,rate);
+    }
    
 }

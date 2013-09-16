@@ -97,14 +97,20 @@ public class LotCatalogue {
         } 
     }
     
-    public static void createLotBid(Lot lot,User user,double bid){
+    public static boolean createLotBid(Lot lot,User user,double bid){
        final ConnectionManager manager = new DerbyConnectionManager();
         try (Connection connection = manager.getConnection("db")) {
             final LotMapper mapper = new LotMapper(connection);
+            Lot test = mapper.find(lot.getId());
+            if(test.getPrice()>=bid){
+                JOptionPane.showMessageDialog(null, "Your bid smaller than last");
+                return false;
+            }
             mapper.createLotBid(lot,user,bid);
-        } catch (SQLException e) {
+        } catch (SQLException | DataMapperException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Cannot add bid!");
-        } 
+        }
+        return true;
     }
 }

@@ -5,11 +5,9 @@
 package gui;
 
 import business.Letter;
-import business.Lot;
 import business.User;
 import java.util.List;
 import service.LetterCatalogue;
-import service.LotCatalogue;
 
 /**
  *

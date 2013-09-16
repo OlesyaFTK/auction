@@ -3,6 +3,7 @@ package service;
 import business.Auction;
 import business.Customer;
 import business.Seller;
+import business.Administrator;
 import business.User;
 import db.*;
 import java.sql.Connection;
@@ -53,6 +54,8 @@ public final class UserCatalogue {
             final User user;
             if(type == 1){
                 user = new Customer(-1, login, password.hashCode(), name, secondName, email,0);
+            }else if(type == 0){
+                user = new Administrator(-1, login, password.hashCode(), name, secondName, email,0);
             }else{
                 user = new Seller(-1, login, password.hashCode(), name, secondName, email,0);
             }
@@ -79,6 +82,17 @@ public final class UserCatalogue {
         try (Connection connection = manager.getConnection("db")) {
             final UserMapper mapper = new UserMapper(connection);
             mapper.updateAccount(user);
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage());
+            throw new IllegalStateException(e.getMessage());
+        }
+    }
+    
+    public static void deleteAccount(User user){
+        final ConnectionManager manager = new DerbyConnectionManager();
+        try (Connection connection = manager.getConnection("db")) {
+            final UserMapper mapper = new UserMapper(connection);
+            mapper.deleteAccount(user);
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
             throw new IllegalStateException(e.getMessage());

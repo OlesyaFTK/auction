@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import service.LotCatalogue;
 
+
 /**
  *
  * @author Олеся
@@ -126,13 +127,11 @@ public class AddBidFrame extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         try{
-        double bid = Double.parseDouble(tfYourBid.getText());
-        if(bid<=lot.getPrice()){
-           JOptionPane.showMessageDialog(null,"Your bid smaller than last bid!"); 
-        }else{
-            LotCatalogue.createLotBid(lot, user, bid);
-            dispose();
-        }
+            double bid = Double.parseDouble(tfYourBid.getText());
+            boolean result = LotCatalogue.createLotBid(lot, user, bid);
+            if(result){
+                dispose();
+            }
         }catch(NumberFormatException e){
             Logger.getLogger(NewLotFrame.class.getName()).log(Level.SEVERE, null, e);
             JOptionPane.showMessageDialog(null,"You enter not number!");

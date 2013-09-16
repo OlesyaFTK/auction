@@ -46,7 +46,15 @@ public class NewLotFrame extends javax.swing.JFrame {
         this.user = user;
         initComponents();
     }
-
+    
+    public void setDescription(String text){
+        this.tfDescription.setText(text);
+    }
+    
+    public String getNameText(){
+        return this.tfName.getText();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -204,7 +212,7 @@ public class NewLotFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         dispose();
-        new MainSellerFrame((Seller)user).setVisible(true);
+        new MainSellerFrame(user).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -242,15 +250,7 @@ public class NewLotFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String name = tfName.getText();
-        HttpClientManager httpClient = new HttpClientManager();
-        try {
-            Document doc = httpClient.getDocumentByName(name);
-            String description = YandexXMLParser.createDescriptionByDocument(doc);
-            tfDescription.setText(description);
-        } catch (IOException ex) {
-            Logger.getLogger(NewLotFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        new DescriptionFrame(this).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
